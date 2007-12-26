@@ -1,0 +1,5 @@
+msrp (0.9.0-1) unstable; urgency=low
+
+  * Initial release. (Closes: #457821)
+
+ -- Rudi Cilibrasi <cilibrar@debian.org>  Tue, 25 Dec 2007 23:52:42 -0800

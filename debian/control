@@ -1,0 +1,20 @@
+Source: msrp
+Priority: optional
+Maintainer: Rudi Cilibrasi <cilibrar@debian.org>
+Build-Depends: debhelper (>= 4.1.0), libpcre3-dev, g++-4.2
+Standards-Version: 3.7.3
+Section: text
+
+Package: msrp
+Section: text
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Architecture: any
+Description: meta search and replace tool for both filenames and files
+ msrp is a data and metadata search and replacement tool.  It easily
+ changes filenames and file contents for all listed command line arguments
+ recursively.  It can help you to rename your symbols in your favorite
+ programming languages, and help you avoid renaming all your files by hand
+ each time you decide to change a function, variable, or class name.  It
+ supports Perl 5 regular expressions with backsubstitution using \.
+ .
+
