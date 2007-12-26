@@ -1,0 +1,22 @@
+msrp by Rudi Cilibrasi <cilibrar@cilibrar.com>
+
+The Meta Search and Replace (msrp) is a simple utility that lets you
+quickly rename symbols or functions or classes or anything using
+Perl 5 compatible regular expressions.  msrp is a time saver because it
+applies your substitution to both the contents of files as well as the
+filenames themselves.  This means that msrp can be used in most modern
+programming languages and programming frameworks where filenames (part
+of file metadata) are used to indicate certain correspondances with
+source code symbols.  If the filenames and source symbols must be
+kept consistent or changed consistently, then msrp is the ideal tool.
+Most languages that support modules embedded in filesystems also have
+this same kind of semantic entanglement.
+
+Here are some examples of languages or frameworks that can benefit from
+msrp functionality:
+
+C/C++ programming (.h files are usually named similar to type names)
+Ruby on Rails (model names must match model filenames, same with views)
+Java programming (renaming classes via regular expression en masse)
+Debian packaging ( cp -rv ../debian . &&  msrp oldpkgname newpkgname debian/ )
+

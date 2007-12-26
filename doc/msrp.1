@@ -1,0 +1,60 @@
+.\" Process this file with
+.\" groff -man -Tascii msrp.1
+.\"
+.TH msrp 1 "DEC 2007" Linux "User Manuals"
+.SH NAME
+msrp \- search and replace file contents and metadata recursively.
+.SH SYNOPSIS
+.B msrp searchpat repstr [-cdfiqsw] [file1 | dir1/] [file2 | dir2/]...
+.SH DESCRIPTION
+.B msrp
+reads in one or more file or directory arguments and applies a
+regular-expression based global transformation.  It searches for searchpat
+as a Perl 5 compatible regular expression and substitutes repstr for
+it for all listed arguments that follow.  msrp applies the substitution
+to both the contents of files as well as the filenames themselves.
+If a filename is changed by a substitution, then the file is renamed to
+reflect the new value.  This type of renaming is useful when using
+filenames that are also used in program source code text and both must
+be kept consistent together.  If a directory argument is given, that
+directory is recursively traversed unless the \-s option is given.
+Directories can also be renamed and all three modes of operation are
+enabled by default.  File contents, file names, and directory names are
+all transformed by the given regular expression substitution.
+
+If a numbered back-substitution group is wanted, simply use a backslash
+followed by a decimal digit to refer to a captured group in the replacement
+string.  Capture group 0 represents the entire match string.
+
+If a file is unchanged by a given regular expression then it will not have
+its modification time updated by msrp.  Only files that are actually changed
+are touched.  The following options can customize behavior:
+.TP
+\fB\-c\fR
+disable file contents transformation
+.TP
+\fB\-d\fR
+disable directory renaming transformation
+.TP
+\fB\-f\fR
+disable filename renaming transformation
+.TP
+\fB\-i\fR
+perform case-insensitive matching
+.TP
+\fB\-q\fR
+quiet mode, with no extra status messages
+.TP
+\fB\-s\fR
+do not recursively enter subdirectories
+.TP
+\fB\-w\fR
+enable word-boundary constraint. This means the matched expression must
+begin and end with a word boundary, as in perl \\b regexp notation.
+.TP
+.SH ENVIRONMENT
+No environment variables.
+.SH BUGS
+Please report bugs to the Debian BTS.
+.SH AUTHOR
+Rudi Cilibrasi <cilibrar@cilibrar.com>
