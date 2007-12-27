@@ -52,6 +52,22 @@ do not recursively enter subdirectories
 enable word-boundary constraint. This means the matched expression must
 begin and end with a word boundary, as in perl \\b regexp notation.
 .TP
+.SH EXAMPLES
+Rename all files in the current directory recursively searched that end
+with the extension .html and rename them to .htm without touching
+file contents or directories:
+.TP
+msrp \-c \-d \(aq(.*)html$\(aq \(aq\\1htm\(aq .
+.TP
+Copy olddebian/ dir to debian/ while changing oldpkgname to newname in
+files, directories, and filenames:
+.TP
+cp -rv olddebian/ debian && msrp oldpkgname newname debian
+.TP
+Normalize extension case of .c files so .C becomes .c:
+.TP
+msrp \-c \-d \-i \(aq(.*)\\.c$\(aq \(aq\\1.c\(aq .
+.TP
 .SH ENVIRONMENT
 No environment variables.
 .SH BUGS
