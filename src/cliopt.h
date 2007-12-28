@@ -33,7 +33,7 @@ class CliOpt {
     do_contents = true;
 
     is_quiet = false;
-    do_dot_dirs = false;
+    do_dot_paths = false;
 
     subdir_recursion = true;
 
@@ -44,7 +44,7 @@ class CliOpt {
 
   bool case_insensitive, word_boundary;
   bool do_filenames, do_directorynames, do_contents;
-  bool is_quiet, do_dot_dirs;
+  bool is_quiet, do_dot_paths;
 
   bool subdir_recursion;
   /* returns true iff it was an option */

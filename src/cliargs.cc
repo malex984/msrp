@@ -42,7 +42,7 @@ bool is_path_dir(const char *path)
 
 bool is_path_filtered(CliOpt options, const char *path)
 {
-  if (options.do_dot_dirs)
+  if (options.do_dot_paths)
     return (strcmp(path, ".") == 0 || strcmp(path, "..") == 0);
   else
     return (path[0] == 0 || path[0] == '.');
@@ -125,7 +125,7 @@ void CliArgs::printHelp(void) const
   cerr << "  -q   quiet mode" << endl;
   cerr << "  -s   disable subdirectory recursion" << endl;
   cerr << "  -w   enable word boundary constraint" << endl;
-  cerr << "  --dot-dirs   enable hidden (.) directory recursion" << endl;
+  cerr << "  --dot-paths   enable hidden (.) directory recursion" << endl;
   cerr << endl;
   cerr << "  Integrated renaming options:" << endl;
 

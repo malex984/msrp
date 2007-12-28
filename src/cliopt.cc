@@ -18,7 +18,7 @@ bool CliOpt::handle_arg(const char *str)
   if (strcmp(str, "-f") == 0) { do_filenames = false; return retval; }
   if (strcmp(str, "-d") == 0) { do_directorynames = false; return retval; }
   if (strcmp(str, "-c") == 0) { do_contents = false; return retval; }
-  if (strcmp(str, "--dot-dirs") == 0) { do_dot_dirs = true; return retval; }
+  if (strcmp(str, "--dot-paths") == 0) { do_dot_paths = true; return retval; }
   if (strcmp(str, "--hg") == 0 || strcmp(str, "--mercurial") == 0)
     { renamer = new HgRename(); return retval; }
   if (strcmp(str, "--svn") == 0 || strcmp(str, "--subversion") == 0)
