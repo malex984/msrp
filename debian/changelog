@@ -1,6 +1,6 @@
 msrp (0.9.1-1) unstable; urgency=low
 
-  * New upstream releasing adding svn and hg support.
+  * New upstream release adding svn and hg support.
 
  -- Rudi Cilibrasi <cilibrar@debian.org>  Fri, 28 Dec 2007 10:31:24 -0800
 
