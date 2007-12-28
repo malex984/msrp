@@ -36,11 +36,9 @@ static int standard_renamer(const char *reposcommand, const char *oldname, const
   args[2] = strdup(oldname);
   args[3] = strdup(newname);
   args[4] = NULL;
-  if (fork() == 0)
+  if (fork() == 0) {
     execv(args[0], args);
-  if (is_path_file(oldname) || is_path_dir(oldname)) {
     cerr << "(warning) rename " << oldname << " => "  << newname << " failed." << endl;
-    retval = 1;
   }
   for (i = 0; i < 4; i += 1)
     free(args[i]);
