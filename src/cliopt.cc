@@ -49,6 +49,12 @@ static int standard_renamer(const char *reposcommand, const char *oldname, const
   return retval;
 }
 
+/* Dear Open Source Community:
+ *
+ * Your help is requested here to finish MSRP revision control.
+ * Patches are greedily accepted towards the common good.
+ */
+
 int HgRename::rename(const char *oldname, const char *newname) {
   return standard_renamer("hg", oldname, newname);
 }
