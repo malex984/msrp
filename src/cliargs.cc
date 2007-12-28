@@ -40,12 +40,15 @@ bool is_path_dir(const char *path)
   return S_ISDIR(get_path_mode(path));
 }
 
-bool is_path_filtered(const char *path)
+bool is_path_filtered(CliOpt options, const char *path)
 {
-  return (strcmp(path, ".") == 0 || strcmp(path, "..") == 0);
+  if (options.do_dot_dirs)
+    return (strcmp(path, ".") == 0 || strcmp(path, "..") == 0);
+  else
+    return (path[0] == 0 || path[0] == '.');
 }
 
-deque<string> expand_dir(const char *path)
+deque<string> expand_dir(CliOpt options, const char *path)
 {
   deque<string> res;
   DIR *d;
@@ -57,7 +60,7 @@ deque<string> expand_dir(const char *path)
   string spath = string(path) + string("/");
   struct dirent *cur;
   while (cur = readdir(d)) {
-    if (is_path_filtered(cur->d_name))
+    if (is_path_filtered(options, cur->d_name))
       continue;
     string cpath = spath + string(cur->d_name);
     const char *cst = cpath.c_str();
@@ -68,7 +71,7 @@ deque<string> expand_dir(const char *path)
   return res;
 }
 
-void TargetList::handle_path(const char *path, bool recurse)
+void TargetList::handle_path(CliOpt options, const char *path, bool recurse)
 {
   if (is_path_file(path)) {
     files.push_front(string(path));
@@ -77,10 +80,10 @@ void TargetList::handle_path(const char *path, bool recurse)
   if (is_path_dir(path)) {
     dirs.push_front(string(path));
     if (recurse) {
-      deque<string> ds = expand_dir(path);
+      deque<string> ds = expand_dir(options, path);
       deque<string>::iterator i;
       for (i = ds.begin(); i != ds.end(); i++) {
-        handle_path((*i).c_str(), recurse);
+        handle_path(options, (*i).c_str(), recurse);
       }
     }
     return;
@@ -93,7 +96,7 @@ TargetList CliArgs::make_target_list(void)
   TargetList tl;
   deque<string>::iterator i;
   for (i = args.begin(); i != args.end(); i++) {
-    tl.handle_path((*i).c_str(), options.subdir_recursion);
+    tl.handle_path(options, (*i).c_str(), options.subdir_recursion);
   }
   return tl;
 }
@@ -122,6 +125,7 @@ void CliArgs::printHelp(void) const
   cerr << "  -q   quiet mode" << endl;
   cerr << "  -s   disable subdirectory recursion" << endl;
   cerr << "  -w   enable word boundary constraint" << endl;
+  cerr << "  --dot-dirs   enable hidden (.) directory recursion" << endl;
   cerr << endl;
   cerr << "  Integrated renaming options:" << endl;
 
