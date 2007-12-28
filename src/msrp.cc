@@ -44,7 +44,7 @@ void process_file(SPCRE s, string repstr, string fname)
       exit(1);
     }
     chmod(tmpfn, get_path_mode(fname.c_str()));
-    s.options.renamer->rename(tmpfn, fname.c_str());
+    rename(tmpfn, fname.c_str());
     free(tmpfn);
   }
 }

@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <iostream>
+#include <sys/wait.h>
 #include "cliopt.h"
 #include "cliargs.h"
 
@@ -38,9 +39,11 @@ static int standard_renamer(const char *reposcommand, const char *oldname, const
   args[4] = NULL;
   if (fork() == 0) {
     cerr << "Trying to execute " << args[0] << endl;
-    execv(args[0], args);
+    execvp(args[0], args);
     cerr << "(warning) rename " << oldname << " => "  << newname << " failed." << endl;
   }
+  else
+    wait(NULL);
   for (i = 0; i < 4; i += 1)
     free(args[i]);
   return retval;
