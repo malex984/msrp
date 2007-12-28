@@ -1,0 +1,6 @@
+version 0.9.1
+
+Added support for --hg (--mercurial) and --svn (--subversion) options.
+Now renaming can happen in your favorite repository system.
+
+Rudi Cilibrasi <cilibrar@cilibrar.com>

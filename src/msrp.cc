@@ -44,7 +44,7 @@ void process_file(SPCRE s, string repstr, string fname)
       exit(1);
     }
     chmod(tmpfn, get_path_mode(fname.c_str()));
-    rename(tmpfn, fname.c_str());
+    s.options.renamer->rename(tmpfn, fname.c_str());
     free(tmpfn);
   }
 }
@@ -57,7 +57,7 @@ void rename_file_maybe(SPCRE s, string repstr, string fname)
     return;
   if (!is_quiet)
     cerr << "(renamed f) " << orig << " => " << xformed << endl;
-  int rc = rename(orig.c_str(), xformed.c_str());
+  int rc = s.options.renamer->rename(orig.c_str(), xformed.c_str());
   if (rc)
     cerr << "Error renaming " << orig << " to " << xformed << endl;
 }
@@ -70,7 +70,7 @@ void rename_dir_maybe(SPCRE s, string repstr, string fname)
     return;
   if (!is_quiet)
     cerr << "(renamed d) " << orig << " => " << xformed << endl;
-  int rc = rename(orig.c_str(), xformed.c_str());
+  int rc = s.options.renamer->rename(orig.c_str(), xformed.c_str());
   if (rc)
     cerr << "Error renaming " << orig << " to " << xformed << endl;
 }

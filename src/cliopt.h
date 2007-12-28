@@ -1,6 +1,26 @@
 #ifndef __CLIOPT_H
 #define __CLIOPT_H
 
+class RenameCommand {
+  public:
+  virtual int rename(const char *oldpath, const char *newpath) = 0;
+};
+
+class PlainRename : public RenameCommand {
+  public:
+  virtual int rename(const char *oldpath, const char *newpath);
+};
+
+class HgRename : public RenameCommand {
+  public:
+  virtual int rename(const char *oldpath, const char *newpath);
+};
+
+class SvnRename : public RenameCommand {
+  public:
+  virtual int rename(const char *oldpath, const char *newpath);
+};
+
 class CliOpt {
   public:
   CliOpt(void) {
@@ -16,7 +36,11 @@ class CliOpt {
 
     subdir_recursion = true;
 
+    renamer = new PlainRename();
   }
+
+  RenameCommand *renamer;
+
   bool case_insensitive, word_boundary;
   bool do_filenames, do_directorynames, do_contents;
   bool is_quiet;

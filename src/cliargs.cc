@@ -123,5 +123,11 @@ void CliArgs::printHelp(void) const
   cerr << "  -s   disable subdirectory recursion" << endl;
   cerr << "  -w   enable word boundary constraint" << endl;
   cerr << endl;
+  cerr << "  Integrated renaming options:" << endl;
+
+  cerr << "  --svn  or --subversion : Subversion RCS rename support" << endl;
+  cerr << "  --hg  or --mercurial : Mercurial    RCS rename support" << endl;
+  cerr << "  --mv  or --plain     : (default) plain Unix rename" << endl;
+  cerr << endl;
 }
 

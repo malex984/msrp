@@ -5,7 +5,7 @@
 .SH NAME
 msrp \- search and replace file contents and metadata recursively.
 .SH SYNOPSIS
-.B msrp searchpat repstr [-cdfiqsw] [file1 | dir1/] [file2 | dir2/]...
+.B msrp searchpat repstr [-cdfiqsw] [--svn | --hg] [file1 | dir1/] [file2 | dir2/]...
 .SH DESCRIPTION
 .B msrp
 reads in one or more file or directory arguments and applies a
@@ -52,6 +52,12 @@ do not recursively enter subdirectories
 enable word-boundary constraint. This means the matched expression must
 begin and end with a word boundary, as in perl \\b regexp notation.
 .TP
+\fB\--hg or --mercurial \fR
+enable Mercurial renaming.
+.TP
+\fB\--svn or --subversion \fR
+enable Subversion renaming.
+.TP
 .SH EXAMPLES
 Rename all files in the current directory recursively searched that end
 with the extension .html and rename them to .htm without touching
@@ -67,6 +73,10 @@ cp -rv olddebian/ debian && msrp oldpkgname newname debian
 Normalize extension case of .c files so .C becomes .c:
 .TP
 msrp \-c \-d \-i \(aq(.*)\\.c$\(aq \(aq\\1.c\(aq .
+.TP
+Rename vector to zector in Subversion:
+.TP
+msrp --svn vector zector .
 .TP
 .SH ENVIRONMENT
 No environment variables.
