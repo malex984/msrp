@@ -114,7 +114,7 @@ void CliArgs::printHelp(void) const
   cerr << endl;
   cerr << "Usage: msrp searchpat repstr [-cdfiqsw] [file1] [dir2/]..." << endl;
   cerr << endl;
-  cerr << "files or directories may be listed.  directories are " << endl;
+  cerr << "files or directories may be listed.  Directories are " << endl;
   cerr << "traversed recursively." << endl;
   cerr << endl;
   cerr << "Options:" << endl;
