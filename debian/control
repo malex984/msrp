@@ -1,7 +1,7 @@
 Source: msrp
 Priority: optional
 Maintainer: Rudi Cilibrasi <cilibrar@debian.org>
-Build-Depends: debhelper (>= 4.1.0), libpcre3-dev, g++
+Build-Depends: debhelper (>= 4.1.0), libpcre3-dev, g++-4.2
 Standards-Version: 3.7.3
 Section: text
 
