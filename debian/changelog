@@ -1,3 +1,9 @@
+msrp (0.9.2-2) unstable; urgency=low
+
+  * Added watch file and Vcs-Hg (Mercurial) tags.
+
+ -- Rudi Cilibrasi <cilibrar@debian.org>  Thu, 06 Mar 2008 13:11:02 -0800
+
 msrp (0.9.2-1) unstable; urgency=low
 
   * New upstream release for gcc-4.3.   Thanks, Martin! (Closes: #462054)
