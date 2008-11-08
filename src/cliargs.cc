@@ -1,7 +1,9 @@
 #include <iostream>
 #include <sys/stat.h>
 #include <dirent.h>
+#include <cstdlib>
 #include "cliargs.h"
+#include <cstring>
 
 using namespace std;
 

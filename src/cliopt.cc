@@ -1,8 +1,10 @@
 #include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <cstdio>
 #include <iostream>
 #include <sys/wait.h>
+#include <cstdlib>
 #include "cliopt.h"
 #include "cliargs.h"
 

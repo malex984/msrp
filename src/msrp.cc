@@ -3,7 +3,8 @@
 #include <fstream>
 #include <istream>
 #include <sys/stat.h>
-#include <stdlib.h>
+#include <cstdlib>
+#include <string.h>
 
 #include <cliopt.h>
 #include <cliargs.h>
