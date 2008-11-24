@@ -22,6 +22,15 @@ CliArgs::CliArgs(const char **argv) {
   repstr = args.front(); args.pop_front();
 }
 
+bool does_file_exist_quiet(const char *path)
+{
+  struct stat s;
+  if (stat(path, &s)) {
+    return false;
+  }
+  return S_ISREG(s.st_mode);
+}
+
 int get_path_mode(const char *path)
 {
   struct stat s;
@@ -114,7 +123,7 @@ void CliArgs::printHelp(void) const
   cerr << "It reads one or more files as input and modifies both their "<< endl;
   cerr << "contents and filenames (by renaming files if appropriate)." << endl;
   cerr << endl;
-  cerr << "Usage: msrp searchpat repstr [-cdfiqsw] [file1] [dir2/]..." << endl;
+  cerr << "Usage: msrp searchpat repstr [-cdfipqsw] [file1] [dir2/]..." << endl;
   cerr << endl;
   cerr << "files or directories may be listed.  Directories are " << endl;
   cerr << "traversed recursively." << endl;
@@ -124,6 +133,7 @@ void CliArgs::printHelp(void) const
   cerr << "  -d   disable directory renaming transformation" << endl;
   cerr << "  -f   disable file renaming transformation" << endl;
   cerr << "  -i   case insensitive match" << endl;
+  cerr << "  -p   preserve original file mode (default is overwrite)" << endl;
   cerr << "  -q   quiet mode" << endl;
   cerr << "  -s   disable subdirectory recursion" << endl;
   cerr << "  -w   enable word boundary constraint" << endl;

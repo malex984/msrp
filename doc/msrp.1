@@ -5,7 +5,7 @@
 .SH NAME
 msrp \- search and replace file contents and metadata recursively.
 .SH SYNOPSIS
-.B msrp searchpat repstr [-cdfiqsw] [--svn | --hg] [file1 | dir1/] [file2 | dir2/]...
+.B msrp searchpat repstr [-cdfipqsw] [--svn | --hg] [file1 | dir1/] [file2 | dir2/]...
 .SH DESCRIPTION
 .B msrp
 reads in one or more file or directory arguments and applies a
@@ -30,7 +30,9 @@ string.  Capture group 0 represents the entire match string.
 
 If a file is unchanged by a given regular expression then it will not have
 its modification time updated by msrp.  Only files that are actually changed
-are touched.  The following options can customize behavior:
+are touched.  If a file would be changed or a file modification would
+overwrite a preexisting file, then an .orig.1 file will be created.
+The following options can customize behavior:
 .TP
 \fB\-c\fR
 disable file contents transformation
@@ -43,6 +45,9 @@ disable filename renaming transformation
 .TP
 \fB\-i\fR
 perform case-insensitive matching
+.TP
+\fB\-p\fR
+preserve mode, so that .orig files are created (default is overwrite mode)
 .TP
 \fB\-q\fR
 quiet mode, with no extra status messages

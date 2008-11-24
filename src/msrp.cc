@@ -13,11 +13,25 @@
 using namespace std;
 
 static bool is_quiet;
+static bool is_preserve;
 
 string fileToString(const char *fname) {
 ifstream in(fname);
 return string(istreambuf_iterator<char>(in),
 istreambuf_iterator<char>());
+}
+
+char * find_unused_filename(const char *startingname) {
+  char *str = (char *) calloc(1, strlen(startingname) + 128);
+  sprintf(str, "%s.orig", startingname);
+  if (!does_file_exist_quiet(str))
+    return str;
+  int i;
+  for (i = 2; ; i += 1) {
+    sprintf(str, "%s.orig-%d", startingname, i);
+    if (!is_path_file(str))
+      return str;
+  }
 }
 
 void process_file(SPCRE s, string repstr, string fname)
@@ -45,7 +59,14 @@ void process_file(SPCRE s, string repstr, string fname)
       exit(1);
     }
     chmod(tmpfn, get_path_mode(fname.c_str()));
-    rename(tmpfn, fname.c_str());
+    const char *destfilename = fname.c_str();
+    if (is_preserve) {
+      char *origdest = find_unused_filename(destfilename);
+      cout << "(preserved: " << destfilename << " => " << origdest << ")"<<endl;
+      rename(destfilename, origdest);
+      free(origdest);
+    }
+    rename(tmpfn, destfilename);
     free(tmpfn);
   }
 }
@@ -58,7 +79,7 @@ void rename_file_maybe(SPCRE s, string repstr, string fname)
     return;
   if (!is_quiet)
     cerr << "(renamed f) " << orig << " => " << xformed << endl;
-  int rc = s.options.renamer->rename(orig.c_str(), xformed.c_str());
+  int rc = s.options.renamer->rename(orig.c_str(), xformed.c_str(), is_preserve);
   if (rc)
     cerr << "Error renaming " << orig << " to " << xformed << endl;
 }
@@ -71,7 +92,7 @@ void rename_dir_maybe(SPCRE s, string repstr, string fname)
     return;
   if (!is_quiet)
     cerr << "(renamed d) " << orig << " => " << xformed << endl;
-  int rc = s.options.renamer->rename(orig.c_str(), xformed.c_str());
+  int rc = s.options.renamer->rename(orig.c_str(), xformed.c_str(), is_preserve);
   if (rc)
     cerr << "Error renaming " << orig << " to " << xformed << endl;
 }
@@ -83,6 +104,7 @@ int main(int argc, const char **argv)
   deque<string>::iterator i;
 
   is_quiet = ca.options.is_quiet;
+  is_preserve = ca.options.do_preserve;
 
   SPCRE s(ca.searchpat, ca.options);
   

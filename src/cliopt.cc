@@ -13,6 +13,7 @@ using namespace std;
 bool CliOpt::handle_arg(const char *str)
 {
   bool retval = true;
+  if (strcmp(str, "-p") == 0) { do_preserve = true; return retval; }
   if (strcmp(str, "-q") == 0) { is_quiet = true; return retval; }
   if (strcmp(str, "-i") == 0) { case_insensitive = true; return retval; }
   if (strcmp(str, "-w") == 0) { word_boundary = true; return retval; }
@@ -57,14 +58,14 @@ static int standard_renamer(const char *reposcommand, const char *oldname, const
  * Patches are greedily accepted towards the common good.
  */
 
-int HgRename::rename(const char *oldname, const char *newname) {
+int HgRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
   return standard_renamer("hg", oldname, newname);
 }
 
-int SvnRename::rename(const char *oldname, const char *newname) {
+int SvnRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
   return standard_renamer("svn", oldname, newname);
 }
 
-int PlainRename::rename(const char *oldname, const char *newname) {
+int PlainRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
   return ::rename(oldname, newname);
 }

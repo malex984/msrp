@@ -3,22 +3,22 @@
 
 class RenameCommand {
   public:
-  virtual int rename(const char *oldpath, const char *newpath) = 0;
+  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode) = 0;
 };
 
 class PlainRename : public RenameCommand {
   public:
-  virtual int rename(const char *oldpath, const char *newpath);
+  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
 };
 
 class HgRename : public RenameCommand {
   public:
-  virtual int rename(const char *oldpath, const char *newpath);
+  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
 };
 
 class SvnRename : public RenameCommand {
   public:
-  virtual int rename(const char *oldpath, const char *newpath);
+  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
 };
 
 class CliOpt {
@@ -34,6 +34,7 @@ class CliOpt {
 
     is_quiet = false;
     do_dot_paths = false;
+    do_preserve = false;
 
     subdir_recursion = true;
 
@@ -45,6 +46,7 @@ class CliOpt {
   bool case_insensitive, word_boundary;
   bool do_filenames, do_directorynames, do_contents;
   bool is_quiet, do_dot_paths;
+  bool do_preserve;
 
   bool subdir_recursion;
   /* returns true iff it was an option */

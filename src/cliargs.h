@@ -7,6 +7,7 @@
 int get_path_mode(const char *path);
 bool is_path_file(const char *path);
 bool is_path_dir(const char *path);
+bool does_file_exist_quiet(const char *path);
 bool is_path_filtered(CliOpt options, const char *path);
 std::deque<std::string> expand_dir(CliOpt options, const char *path);
 
