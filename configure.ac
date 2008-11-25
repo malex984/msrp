@@ -36,4 +36,4 @@ LIBS="$LIBS $PCRE_LIBS"
 
 AM_MAINTAINER_MODE
 
-AC_OUTPUT([Makefile src/Makefile])
+AC_OUTPUT([Makefile src/Makefile src/autover.h])

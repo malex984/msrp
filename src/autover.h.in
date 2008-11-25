@@ -1,0 +1,6 @@
+#ifndef __AUTOVER_H
+#define __AUTOVER_H
+
+#define MSRP_VERSION_STRING "@PACKAGE_VERSION@"
+
+#endif

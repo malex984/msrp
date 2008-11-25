@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <cstdlib>
 #include "cliargs.h"
+#include "autover.h"
 #include <cstring>
 
 using namespace std;
@@ -115,6 +116,7 @@ TargetList CliArgs::make_target_list(void)
 void CliArgs::printHelp(void) const
 {
   cerr << endl;
+  cerr << "msrp version " << MSRP_VERSION_STRING << endl;
   cerr << "msrp is a meta search and replace utility." << endl;
   cerr << endl;
   cerr << "msrp was written by Rudi Cilibrasi (cilibrar@cilibrar.com)." << endl;
@@ -142,6 +144,7 @@ void CliArgs::printHelp(void) const
   cerr << "  Integrated renaming options:" << endl;
 
   cerr << "  --svn  or --subversion : Subversion RCS rename support" << endl;
+  cerr << "  --preserve             : same as -p (preserve .orig files)"<< endl;
   cerr << "  --hg  or --mercurial : Mercurial    RCS rename support" << endl;
   cerr << "  --mv  or --plain     : (default) plain Unix rename" << endl;
   cerr << endl;

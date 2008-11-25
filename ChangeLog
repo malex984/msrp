@@ -1,3 +1,9 @@
+version 0.9.3
+Tue, 25 Nov 2008 12:04:31 -0800
+
+Added -p (--preserve) option.  This is used to create .orig files in case
+there would be overwriting (the default).
+
 version 0.9.1
 Fri, 28 Dec 2007 10:25:11 -0800
 
