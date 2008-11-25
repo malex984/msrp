@@ -1,4 +1,4 @@
-msrp (0.9.2-3) unstable; urgency=low
+msrp (0.9.3-1) unstable; urgency=low
 
   * New upstream release adding --preserve option. (Closes: #504938)
 
