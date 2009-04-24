@@ -1,3 +1,9 @@
+msrp (0.9.4-1) unstable; urgency=low
+
+  * New upstream release with better renaming for files and directories.
+
+ -- Rudi Cilibrasi <cilibrar@debian.org>  Thu, 23 Apr 2009 21:33:47 -0700
+
 msrp (0.9.3-1) unstable; urgency=low
 
   * New upstream release adding --preserve option. (Closes: #504938)

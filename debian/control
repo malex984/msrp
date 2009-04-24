@@ -1,7 +1,7 @@
 Source: msrp
 Priority: optional
 Maintainer: Rudi Cilibrasi <cilibrar@debian.org>
-Build-Depends: debhelper (>= 4.1.0), libpcre3-dev, g++-4.2
+Build-Depends: debhelper (>= 4.1.0), libpcre3-dev, g++-4.3
 Standards-Version: 3.8.0
 Section: text
 Vcs-Browser: http://hg.debian.org/hg/private/cilibrar/pkg-msrp
