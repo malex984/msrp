@@ -5,6 +5,7 @@
 #include "cliargs.h"
 #include "autover.h"
 #include <cstring>
+#include <algorithm>
 
 using namespace std;
 
