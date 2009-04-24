@@ -71,11 +71,21 @@ void process_file(SPCRE s, string repstr, string fname)
   }
 }
 
+string cplusplusbasename(string inpstring)
+{
+  char *dup = strdup(inpstring.c_str());
+  string result = string(basename(dup));
+  free(dup);
+  return result;
+}
+
 void rename_file_maybe(SPCRE s, string repstr, string fname)
 {
   string orig = fname;
   string xformed = s.gsub(orig, repstr);
   if (orig == xformed)
+    return;
+  if (cplusplusbasename(orig) == cplusplusbasename(xformed))
     return;
   if (!is_quiet)
     cerr << "(renamed f) " << orig << " => " << xformed << endl;
@@ -89,6 +99,8 @@ void rename_dir_maybe(SPCRE s, string repstr, string fname)
   string orig = fname;
   string xformed = s.gsub(orig, repstr);
   if (orig == xformed)
+    return;
+  if (cplusplusbasename(orig) == cplusplusbasename(xformed))
     return;
   if (!is_quiet)
     cerr << "(renamed d) " << orig << " => " << xformed << endl;

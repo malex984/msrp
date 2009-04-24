@@ -103,6 +103,16 @@ void TargetList::handle_path(CliOpt options, const char *path, bool recurse)
   cerr << "Skipping irregular " << path << endl;
 }
 
+bool directorySortCriterion(const string& s1, const string& s2) {
+  int l1 = s1.length();
+  int l2 = s2.length();
+  if (l2 < l1)
+    return true;
+  if (l2 > l1)
+    return false;
+  return (s2 > s1);
+}
+
 TargetList CliArgs::make_target_list(void)
 {
   TargetList tl;
@@ -110,6 +120,7 @@ TargetList CliArgs::make_target_list(void)
   for (i = args.begin(); i != args.end(); i++) {
     tl.handle_path(options, (*i).c_str(), options.subdir_recursion);
   }
+  sort(tl.dirs.begin(), tl.dirs.end(), directorySortCriterion);
   return tl;
 }
 

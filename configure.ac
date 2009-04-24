@@ -1,5 +1,5 @@
 
-AC_INIT(msrp,0.9.3,cilibrar@cilibrar.com)
+AC_INIT(msrp,0.9.4,cilibrar@cilibrar.com)
 AC_CONFIG_SRCDIR(src/msrp.cc)
 AM_INIT_AUTOMAKE
 AC_CANONICAL_HOST
