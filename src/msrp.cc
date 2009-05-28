@@ -10,6 +10,11 @@
 #include <cliargs.h>
 #include <spcre.h>
 
+#include "autocheck.h"
+#if HAVE_LIBGEN_H
+#include <libgen.h>
+#endif
+
 using namespace std;
 
 static bool is_quiet;
