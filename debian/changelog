@@ -1,3 +1,9 @@
+msrp (0.9.4-2) unstable; urgency=low
+
+  * Switched to default compiler version.
+
+ -- Rudi Cilibrasi <cilibrar@debian.org>  Sun, 21 Jun 2009 18:57:47 -0700
+
 msrp (0.9.4-1) unstable; urgency=low
 
   * New upstream release with better renaming for files and directories.
