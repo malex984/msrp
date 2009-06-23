@@ -10,11 +10,6 @@
 #include <cliargs.h>
 #include <spcre.h>
 
-#include "autocheck.h"
-#if HAVE_LIBGEN_H
-#include <libgen.h>
-#endif
-
 using namespace std;
 
 static bool is_quiet;
@@ -79,7 +74,16 @@ void process_file(SPCRE s, string repstr, string fname)
 string cplusplusbasename(string inpstring)
 {
   char *dup = strdup(inpstring.c_str());
-  string result = string(basename(dup));
+  string result;
+#if defined(WIN32) || defined(WINDOWS) || defined(_WINDOWS) || defined(CYGWIN)
+	int lastIndex = inpstring.find_last_of("/\\");
+	if (lastIndex == std::string::npos)
+		result = inpstring;
+	else
+		result = inpstring.substr(lastIndex + 1);
+#else
+  result = string(basename(dup));
+#endif
   free(dup);
   return result;
 }

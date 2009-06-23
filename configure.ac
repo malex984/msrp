@@ -1,13 +1,10 @@
-
 AC_INIT(msrp,0.9.5,cilibrar@cilibrar.com)
-AM_MAINTAINER_MODE
 AC_CONFIG_SRCDIR(src/msrp.cc)
 AM_INIT_AUTOMAKE
 AC_CANONICAL_HOST
-if echo "$host" | grep -i darwin ; then
-  export CPPFLAGS="$CPPFLAGS -I/opt/local/include"
-fi
-
+case "${host_os}" in
+cygwin) AC_DEFINE(WINDOWS,1) ;;
+esac
 AC_PROG_CXX
 AC_ARG_WITH(pcre,
 [--with-pcre=PATH,Explicit PCRE library path], ,
@@ -38,7 +35,7 @@ PCRE_CFLAGS=`$PCRE_CONFIG --cflags`
 CFLAGS="$CFLAGS $PCRE_CFLAGS"
 PCRE_LIBS=`$PCRE_CONFIG --libs`
 LIBS="$LIBS $PCRE_LIBS"
-AC_CHECK_HEADER([libgen.h],
-[AC_DEFINE([HAVE_LIBGEN_H],[1],[Set to 1 if libgen.h exists])])
-AC_CONFIG_HEADER([src/autocheck.h])
+
+AM_MAINTAINER_MODE
+
 AC_OUTPUT([Makefile src/Makefile src/autover.h])
