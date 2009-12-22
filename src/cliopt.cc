@@ -27,17 +27,19 @@ bool CliOpt::handle_arg(const char *str)
     { renamer = new HgRename(); return retval; }
   if (strcmp(str, "--svn") == 0 || strcmp(str, "--subversion") == 0)
     { renamer = new SvnRename(); return retval; }
+  if (strcmp(str, "--git") == 0)
+    { renamer = new GitRename(); return retval; }
   if (strcmp(str, "--mv") == 0 || strcmp(str, "--plain") == 0)
     { renamer = new PlainRename(); return retval; }
   return false;
 }
 
-static int standard_renamer(const char *reposcommand, const char *oldname, const char *newname) {
+static int standard_renamer(const char *reposcommand, const char *repossubcommand, const char *oldname, const char *newname) {
   char *args[5];
   int retval = 0;
   int i;
   args[0] = strdup(reposcommand);
-  args[1] = strdup("rename");
+  args[1] = strdup(repossubcommand);
   args[2] = strdup(oldname);
   args[3] = strdup(newname);
   args[4] = NULL;
@@ -60,11 +62,15 @@ static int standard_renamer(const char *reposcommand, const char *oldname, const
  */
 
 int HgRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
-  return standard_renamer("hg", oldname, newname);
+  return standard_renamer("hg", "rename", oldname, newname);
 }
 
 int SvnRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
-  return standard_renamer("svn", oldname, newname);
+  return standard_renamer("svn", "rename", oldname, newname);
+}
+
+int GitRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
+  return standard_renamer("git", "mv", oldname, newname);
 }
 
 int PlainRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
