@@ -26,6 +26,11 @@ class GitRename : public RenameCommand {
   virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
 };
 
+class BzrRename : public RenameCommand {
+  public:
+  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
+};
+
 class CliOpt {
   public:
   CliOpt(void) {

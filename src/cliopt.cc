@@ -29,6 +29,8 @@ bool CliOpt::handle_arg(const char *str)
     { renamer = new SvnRename(); return retval; }
   if (strcmp(str, "--git") == 0)
     { renamer = new GitRename(); return retval; }
+  if (strcmp(str, "--bzr") == 0 || strcmp(str, "--bazaar") == 0)
+    { renamer = new BzrRename(); return retval; }
   if (strcmp(str, "--mv") == 0 || strcmp(str, "--plain") == 0)
     { renamer = new PlainRename(); return retval; }
   return false;
@@ -71,6 +73,10 @@ int SvnRename::rename(const char *oldname, const char *newname, bool preserve_mo
 
 int GitRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
   return standard_renamer("git", "mv", oldname, newname);
+}
+
+int BzrRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
+  return standard_renamer("bzr", "mv", oldname, newname);
 }
 
 int PlainRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
