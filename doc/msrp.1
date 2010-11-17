@@ -1,0 +1,93 @@
+.\" Process this file with
+.\" groff -man -Tascii msrp.1
+.\"
+.TH msrp 1 "DEC 2007" Linux "User Manuals"
+.SH NAME
+msrp \- search and replace file contents and metadata recursively.
+.SH SYNOPSIS
+.B msrp searchpat repstr [-cdfipqsw] [--svn | --hg] [file1 | dir1/] [file2 | dir2/]...
+.SH DESCRIPTION
+.B msrp
+reads in one or more file or directory arguments and applies a
+regular-expression based global transformation.  It searches for searchpat
+as a Perl 5 compatible regular expression and substitutes repstr for
+it for all listed arguments that follow.  msrp applies the substitution
+to both the contents of files as well as the filenames themselves.
+If a filename is changed by a substitution, then the file is renamed to
+reflect the new value.  This type of renaming is useful when using
+filenames that are also used in program source code text and both must
+be kept consistent together.  If a directory argument is given, that
+directory is recursively traversed unless the \-s option is given.
+Directories can also be renamed and all three modes of operation are
+enabled by default.  File contents, file names, and directory names are
+all transformed by the given regular expression substitution.  Note that
+subdirectories starting with . are not entered recursively unless the
+--dot-paths option is specified.
+
+If a numbered back-substitution group is wanted, simply use a backslash
+followed by a decimal digit to refer to a captured group in the replacement
+string.  Capture group 0 represents the entire match string.
+
+If a file is unchanged by a given regular expression then it will not have
+its modification time updated by msrp.  Only files that are actually changed
+are touched.  If a file would be changed or a file modification would
+overwrite a preexisting file, then an .orig.1 file will be created.
+The following options can customize behavior:
+.TP
+\fB\-c\fR
+disable file contents transformation
+.TP
+\fB\-d\fR
+disable directory renaming transformation
+.TP
+\fB\-f\fR
+disable filename renaming transformation
+.TP
+\fB\-i\fR
+perform case-insensitive matching
+.TP
+\fB\-p\fR
+preserve mode, so that .orig files are created (default is overwrite mode)
+.TP
+\fB\-q\fR
+quiet mode, with no extra status messages
+.TP
+\fB\-s\fR
+do not recursively enter subdirectories
+.TP
+\fB\-w\fR
+enable word-boundary constraint. This means the matched expression must
+begin and end with a word boundary, as in perl \\b regexp notation.
+.TP
+\fB\--hg or --mercurial \fR
+enable Mercurial renaming.
+.TP
+\fB\--svn or --subversion \fR
+enable Subversion renaming.
+.TP
+.SH EXAMPLES
+Rename all files in the current directory recursively searched that end
+with the extension .html and rename them to .htm without touching
+file contents or directories:
+.TP
+msrp \-c \-d \(aq(.*)html$\(aq \(aq\\1htm\(aq .
+.TP
+Copy olddebian/ dir to debian/ while changing oldpkgname to newname in
+files, directories, and filenames:
+.TP
+cp -rv olddebian/ debian && msrp oldpkgname newname debian
+.TP
+Normalize extension case of .c files so .C becomes .c:
+.TP
+msrp \-c \-d \-i \(aq(.*)\\.c$\(aq \(aq\\1.c\(aq .
+.TP
+Rename vector to zector in Subversion:
+.TP
+msrp --svn vector zector .
+.TP
+.SH ENVIRONMENT
+No environment variables.
+.SH BUGS
+Please report bugs to the Debian BTS.
+.SH AUTHOR
+Rudi Cilibrasi <cilibrar@cilibrar.com>
