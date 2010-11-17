@@ -1,0 +1,47 @@
+# Contributor: malex984 at googlemail dot com
+
+pkgname=msrp-git
+pkgver=20101117
+pkgrel=1
+pkgdesc="Meta search and replace tool for both filenames and files"
+arch=('i686' 'x86_64')
+url="http://agateau.wordpress.com/2010/03/10/msrp-a-useful-addition-to-your-toolbo/"
+license=("unknown")
+groups=()
+depends=(pcre)
+makedepends=('git' 'pkgconfig' 'automake' 'autoconf')
+conflicts=('msrp')
+provides=('msrp')
+replaces=(msrp)
+backup=()
+options=()
+install=
+noextract=()
+
+_gitroot="git://github.com/malex984/msrp.git"
+_gitname="msrp"
+
+build() {
+    cd ${srcdir}
+
+    msg "Connecting to the git repository..."
+    if [ -d ${srcdir}/${_gitname} ]; then
+        cd ${_gitname}
+        git pull origin
+    else
+        git clone --depth 1 -b master ${_gitroot} 
+    fi
+    msg "GIT checkout done or server timeout"
+
+    rm -rf ${srcdir}/${_gitname}-build
+    cp -r  ${srcdir}/${_gitname} ${srcdir}/${_gitname}-build
+    cd ${srcdir}/${_gitname}-build
+
+
+    msg "Configuring..."
+    ./configure --prefix=/usr
+
+    msg "Starting make..."
+    make || return 1
+    make DESTDIR="${pkgdir}/" install || return 1
+}
