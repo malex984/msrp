@@ -158,6 +158,7 @@ void CliArgs::printHelp(void) const
   cerr << "  --svn  or --subversion : Subversion RCS rename support" << endl;
   cerr << "  --preserve             : same as -p (preserve .orig files)"<< endl;
   cerr << "  --hg  or --mercurial : Mercurial    RCS rename support" << endl;
+  cerr << "  --git                : Git          RCS rename support" << endl;
   cerr << "  --mv  or --plain     : (default) plain Unix rename" << endl;
   cerr << endl;
 }
