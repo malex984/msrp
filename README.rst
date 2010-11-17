@@ -3,7 +3,7 @@ There is a nice tool: msrp
 (just take a look at:
 http://agateau.wordpress.com/2010/03/10/msrp-a-useful-addition-to-your-toolbo/)
 
-it relies on PCRE to do regexp-matching and is limited to \\0..\\1 in back-regexp-ing
+it relies on PCRE to do regexp-matching and is limited to \\0..\\9 in back-regexp-ing
 
 i wanted to be able to substitute some tag by file' name while
 changing the file. 
