@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string SPCREResult::backsub(string origstr)
+string SPCREResult::backsub(string origstr, string currfile)
 {
   int curoffset = 0;
   int len = origstr.size();
@@ -21,6 +21,8 @@ string SPCREResult::backsub(string origstr)
           int whichnum = c - '0';
           if (whichnum <= cap.size())
             res.append(cap[whichnum]);
+        } else if( c == 'f' ) {
+          res.append(currfile);
         }
       }
       curoffset = slashind + 2;
@@ -33,7 +35,7 @@ string SPCREResult::backsub(string origstr)
   return res;
 }
 
-string SPCRE::gsub(string origstr, string repstr)
+string SPCRE::gsub(string origstr, string repstr, string currfile)
 {
   int curoffset = 0;
   int len = origstr.size();
@@ -43,7 +45,7 @@ string SPCRE::gsub(string origstr, string repstr)
     SPCREResult r = match(origstr, curoffset);
     if (r.didmatch) {
       res.append(cs + curoffset, r.start_offset - curoffset);
-      res.append(r.backsub(repstr));
+      res.append(r.backsub(repstr, currfile));
       curoffset = r.pastend_offset;
     }
     else {

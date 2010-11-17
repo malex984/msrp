@@ -10,7 +10,7 @@
 
 class SPCREResult {
   public:
-  std::string backsub(std::string inpstr);
+  std::string backsub(std::string inpstr, std::string currfile = "");
   bool didmatch, didfinish;
   int start_offset, pastend_offset;
   int matchlen(void) const { return pastend_offset - start_offset; }
@@ -27,7 +27,7 @@ class SPCRE {
   pcre *prex;
   pcre_extra *prex_study;
   SPCREResult match(std::string inpstr, int offset);
-  std::string gsub(std::string origstr, std::string repstr);
+  std::string gsub(std::string origstr, std::string repstr, std::string currfile = "");
 };
 
 #endif

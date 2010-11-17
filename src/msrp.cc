@@ -37,7 +37,7 @@ char * find_unused_filename(const char *startingname) {
 void process_file(SPCRE s, string repstr, string fname)
 {
   string orig = fileToString(fname.c_str());
-  string xformed = s.gsub(orig, repstr);
+  string xformed = s.gsub(orig, repstr, fname);
   if (orig == xformed)
     return;
   else {
@@ -82,7 +82,7 @@ string cplusplusbasename(string inpstring)
 void rename_file_maybe(SPCRE s, string repstr, string fname)
 {
   string orig = fname;
-  string xformed = s.gsub(orig, repstr);
+  string xformed = s.gsub(orig, repstr, fname);
   if (orig == xformed)
     return;
   if (cplusplusbasename(orig) == cplusplusbasename(xformed))
@@ -97,7 +97,7 @@ void rename_file_maybe(SPCRE s, string repstr, string fname)
 void rename_dir_maybe(SPCRE s, string repstr, string fname)
 {
   string orig = fname;
-  string xformed = s.gsub(orig, repstr);
+  string xformed = s.gsub(orig, repstr, fname);
   if (orig == xformed)
     return;
   if (cplusplusbasename(orig) == cplusplusbasename(xformed))
@@ -119,7 +119,6 @@ int main(int argc, const char **argv)
   is_preserve = ca.options.do_preserve;
 
   SPCRE s(ca.searchpat, ca.options);
-  
 
   tl = ca.make_target_list();
 
