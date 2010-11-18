@@ -4,3 +4,8 @@ Makefile
 .deps
 src/autover.h
 src/msrp
+
+share/src/
+share/pkg/
+share/*pkg*
+
