@@ -69,7 +69,7 @@ static int standard_renamer(const char *reposcommand, const char *repossubcomman
 
 int PlainRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
   errno = 0;
-  cerr << "trying: plane rename" << endl << flush;
+  cerr << "trying: plain rename" << endl << flush;
   int retval = ::rename(oldname, newname);
   if ( (errno != 0) || (retval == -1))
     return 1;
