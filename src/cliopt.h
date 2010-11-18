@@ -3,31 +3,39 @@
 
 class RenameCommand {
   public:
-  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode) = 0;
+  /// returns non-zero value in case of an error
+  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode) {
+    return 1; // cannot rename!
+  };
 };
 
 class PlainRename : public RenameCommand {
-  public:
+  typedef RenameCommand base;
+public:
   virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
 };
 
-class HgRename : public RenameCommand {
-  public:
+class HgRename : public PlainRename {
+  typedef PlainRename base;
+public:
   virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
 };
 
-class SvnRename : public RenameCommand {
-  public:
+class SvnRename : public PlainRename {
+  typedef PlainRename base;
+public:
   virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
 };
 
-class GitRename : public RenameCommand {
-  public:
+class GitRename : public PlainRename {
+  typedef PlainRename base;
+public:
   virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
 };
 
-class BzrRename : public RenameCommand {
-  public:
+class BzrRename : public PlainRename {
+  typedef PlainRename base;
+public:
   virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
 };
 
