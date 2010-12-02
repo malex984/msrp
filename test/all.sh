@@ -7,5 +7,10 @@ echo
 ./git.mv.sh  || exit 1
 
 
+echo 
+
+./nl.sh  || exit 1
+
+
 
 
