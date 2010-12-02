@@ -1,15 +1,15 @@
 # Contributor: malex984 at googlemail dot com
 
 pkgname=msrp-git
-pkgver=20101118
-pkgrel=2
+pkgver=20101203
+pkgrel=1
 pkgdesc="Meta search and replace tool for both filenames and files: improved"
 arch=('i686' 'x86_64')
 url="https://github.com/malex984/msrp"
 license=("unknown")
 groups=()
 depends=(pcre)
-makedepends=('git' 'pkgconfig' 'automake' 'autoconf')
+makedepends=('git' 'pkg-config' 'automake' 'autoconf')
 conflicts=('msrp')
 provides=('msrp')
 replaces=(msrp)
@@ -37,6 +37,8 @@ build() {
     cp -r  ${srcdir}/${_gitname} ${srcdir}/${_gitname}-build
     cd ${srcdir}/${_gitname}-build
 
+    msg "Generating 'configure'..."
+    aclocal && automake --add-missing && autoconf
 
     msg "Configuring..."
     ./configure --prefix=/usr
