@@ -10,6 +10,8 @@
 #include <cliargs.h>
 #include <spcre.h>
 
+#include <string>
+
 using namespace std;
 
 static bool is_quiet;
@@ -32,6 +34,34 @@ char * find_unused_filename(const char *startingname) {
     if (!is_path_file(str))
       return str;
   }
+}
+
+
+string pre_backsub(string origstr, string filename)
+{
+  int curoffset = 0;
+  int len = origstr.size();
+  string res;
+  const char *cs = origstr.c_str();
+  while (curoffset < len) {
+    int slashind = origstr.find('\\', curoffset);
+    if (slashind != string::npos) {
+      res.append(cs + curoffset, slashind - curoffset);
+      if (slashind + 1 < len) {
+        char c = cs[slashind+1];
+        if (c == 'f' )
+          res.append(filename);
+        else 
+          res.append(cs + slashind, 2); // preserve other markers
+      }
+      curoffset = slashind + 2;
+    }
+    else {
+      res.append(cs + curoffset, len - curoffset);
+      break;
+    }
+  }
+  return res;
 }
 
 void process_file(SPCRE s, string repstr, string fname)
@@ -123,17 +153,17 @@ int main(int argc, const char **argv)
   is_quiet = ca.options.is_quiet;
   is_preserve = ca.options.do_preserve;
 
-  SPCRE s(ca.searchpat, ca.options);
-  
-
   tl = ca.make_target_list();
 
   if (ca.options.do_contents) {
     for (i = tl.files.begin(); i != tl.files.end(); i++) {
       string cur = (*i);
-      process_file(s,ca.repstr, cur);
+      SPCRE s(pre_backsub(ca.searchpat, cur), ca.options);
+      process_file(s, pre_backsub(ca.repstr, cur), cur);
     }
   }
+
+  SPCRE s(ca.searchpat, ca.options);
 
   if (ca.options.do_filenames) {
     for (i = tl.files.begin(); i != tl.files.end(); i++) {
