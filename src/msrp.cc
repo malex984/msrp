@@ -123,7 +123,7 @@ void rename_file_maybe(SPCRE s, string repstr, string fname)
   if (cplusplusbasename(orig) == cplusplusbasename(xformed))
     return;
   if (!is_quiet)
-    cerr << "(renamed f) " << orig << " => " << xformed << endl;
+    cerr << "(renaming f) " << orig << " => " << xformed << endl;
   int rc = s.options.renamer->rename(orig.c_str(), xformed.c_str(), is_preserve);
   if (rc)
     cerr << "Error renaming " << orig << " to " << xformed << endl;
@@ -138,7 +138,7 @@ void rename_dir_maybe(SPCRE s, string repstr, string fname)
   if (cplusplusbasename(orig) == cplusplusbasename(xformed))
     return;
   if (!is_quiet)
-    cerr << "(renamed d) " << orig << " => " << xformed << endl;
+    cerr << "(renaming d) " << orig << " => " << xformed << endl;
   int rc = s.options.renamer->rename(orig.c_str(), xformed.c_str(), is_preserve);
   if (rc)
     cerr << "Error renaming " << orig << " to " << xformed << endl;
