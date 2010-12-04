@@ -1,8 +1,44 @@
-AC_INIT(msrp,0.9.4,cilibrar@cilibrar.com)
+
+AC_INIT([msrp],[0.9.4],[cilibrar@cilibrar.com])
 AC_CONFIG_SRCDIR(src/msrp.cc)
 AM_INIT_AUTOMAKE
 AC_CANONICAL_HOST
-AC_PROG_CXX
+
+echo "relevant environment variable values, if any:"
+for x in CC FC CXX CPPFLAGS CFLAGS FCFLAGS CXXFLAGS LDFLAGS LIBS ISSUE DISTRIBUTION
+do eval v=\$$x
+   test "$v" && echo "   $x=$v"
+done
+
+
+for i in $CFLAGS
+do case $i in
+   -I*) AC_MSG_ERROR("preprocessor flag $i found in CFLAGS instead of in CPPFLAGS") ;;
+   -L*) AC_MSG_ERROR("link flag $i found in CFLAGS instead of in LDFLAGS");;
+   esac
+done
+
+for i in $CXXFLAGS
+do case $i in
+   -I*) AC_MSG_ERROR("preprocessor flag $i found in CXXFLAGS instead of in CPPFLAGS");;
+   -L*) AC_MSG_ERROR("link flag $i found in CXXFLAGS instead of in LDFLAGS");;
+   esac
+done
+
+for i in $CPPFLAGS
+do case $i in
+   -L*) AC_MSG_ERROR("link flag $i found in CPPFLAGS instead of in LDFLAGS");;
+   esac
+done
+
+for i in $LDFLAGS
+do case $i in
+   -I*) AC_MSG_ERROR("preprocessor flag $i found in LDFLAGS instead of in CPPFLAGS");;
+   esac
+done
+
+test "$CXX" = gcc && AC_MSG_ERROR("oops, CXX=gcc, should use CXX=g++")
+
 AC_ARG_WITH(pcre,
 [--with-pcre=PATH,Explicit PCRE library path], ,
 [ with_pcre=yes ]
@@ -28,11 +64,20 @@ if $PCRE_CONFIG --version >&/dev/null; then echo -n ; else
 fi
 
 AC_MSG_NOTICE([Using PCRE library from $PCRE_CONFIG])
+
 PCRE_CFLAGS=`$PCRE_CONFIG --cflags`
-CFLAGS="$CFLAGS $PCRE_CFLAGS"
 PCRE_LIBS=`$PCRE_CONFIG --libs`
-LIBS="$LIBS $PCRE_LIBS"
+
+AC_MSG_NOTICE([CFLAGS: $PCRE_CFLAGS])
+AC_MSG_NOTICE([LIBS: $PCRE_LIBS])
+         
+AC_SUBST([PCRE_CFLAGS])
+AC_SUBST([PCRE_LIBS])
+
+
+AC_PROG_CXX
 
 AM_MAINTAINER_MODE
 
-AC_OUTPUT([Makefile src/Makefile src/autover.h])
+AC_CONFIG_FILES([Makefile src/Makefile src/autover.h])
+AC_OUTPUT
