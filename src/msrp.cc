@@ -18,9 +18,9 @@ static bool is_quiet;
 static bool is_preserve;
 
 string fileToString(const char *fname) {
-ifstream in(fname);
-return string(istreambuf_iterator<char>(in),
-istreambuf_iterator<char>());
+  ifstream in(fname);
+  return string(istreambuf_iterator<char>(in),
+                istreambuf_iterator<char>());
 }
 
 char * find_unused_filename(const char *startingname) {
@@ -51,6 +51,10 @@ string pre_backsub(string origstr, string filename)
         char c = cs[slashind+1];
         if (c == 'f' )
           res.append(filename);
+        else if (c == 'n') 
+          res.append("\n");
+        else if (c == 'r') 
+          res.append("\r");
         else 
           res.append(cs + slashind, 2); // preserve other markers
       }
