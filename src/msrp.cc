@@ -10,6 +10,9 @@
 #include <cliargs.h>
 #include <spcre.h>
 
+// For basename:
+#include <libgen.h>
+
 #include <string>
 
 using namespace std;
