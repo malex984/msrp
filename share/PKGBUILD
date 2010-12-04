@@ -46,7 +46,7 @@ build() {
     
     msg "Starting file.cc test..."
     cd test || return 1
-    ./file.cc.sh || return 1
+    ./all.sh || return 1
     cd -
     
     msg "Installing..."
