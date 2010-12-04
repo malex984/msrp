@@ -1,5 +1,7 @@
 #! /bin/sh
 
+echo "TESTING \f option: "
+
 cp -f file.cc.in file.cc
 
 echo "forward test:"
