@@ -1,0 +1,9 @@
+New: 
+
+in order to generate "configure" script please you the following:
+
+aclocal && automake --add-missing && autoconf
+
+Afterwards proceed as usual:
+
+./configure && make
