@@ -25,7 +25,6 @@
 
 SUBDIRS=src
 
-
 DISTCLEAN_TARGETS = config.status config.log configure Makefile.in config.log depcomp config.guess config.sub Makefile autom4te.cache libtool missing aclocal.m4 install-sh
 
 distclean: clean
@@ -41,3 +40,12 @@ EXTRA_DIST = $(doc) \
 src/cliargs.h \
 src/cliopt.h \
 src/spcre.h
+
+
+test_all:
+	$(MAKE) -C test
+
+dist: test_all
+
+
+# TODO: add target for pushing dist-generated release tarball to gh-pages branch

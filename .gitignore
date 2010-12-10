@@ -4,6 +4,7 @@ config.guess
 config.sub
 configure
 Makefile
+!test/Makefile
 Makefile.in
 .deps
 src/autover.h
