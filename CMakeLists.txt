@@ -7,7 +7,7 @@ set(PACKAGE_VERSION 0.9.5)
 set(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${PACKAGE_VERSION})
 add_custom_target(dist
     COMMAND git archive --prefix=${ARCHIVE_NAME}/ HEAD
-        | bzip2 > ${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}.tar.bz2
+        | bzip2 -9 > ${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}.tar.bz2
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 # Dependencies
