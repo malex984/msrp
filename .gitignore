@@ -13,3 +13,4 @@ share/src/
 share/pkg/
 share/*pkg*
 
+*.swp
