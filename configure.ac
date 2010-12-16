@@ -1,7 +1,8 @@
 
-AC_INIT([msrp],[0.9.4],[cilibrar@cilibrar.com])
+AC_INIT([msrp],[0.9.4],[msrp-tool@googlegroups.com], [msrp], [http://msrp.github.com])
 AC_CONFIG_SRCDIR(src/msrp.cc)
 AM_INIT_AUTOMAKE
+#AM_INIT_AUTOMAKE([-Wall -Werror foreign -Wextra -pedantic -fdiagnostics-show-option])
 AC_CANONICAL_HOST
 
 echo "relevant environment variable values, if any:"

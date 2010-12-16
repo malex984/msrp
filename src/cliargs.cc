@@ -128,10 +128,14 @@ TargetList CliArgs::make_target_list(void)
 void CliArgs::printHelp(void) const
 {
   cerr << endl;
-  cerr << "msrp version " << MSRP_VERSION_STRING << endl;
-  cerr << "msrp is a meta search and replace utility." << endl;
+  cerr << MSRP_PACKAGE_NAME << " version " << MSRP_PACKAGE_VERSION << endl;
+  cerr << MSRP_PACKAGE_NAME << " is a meta search and replace utility." << endl;
   cerr << endl;
-  cerr << "msrp was written by Rudi Cilibrasi (cilibrar@cilibrar.com)." << endl;
+  cerr << "It was originally written by Rudi Cilibrasi but is currently" << endl;
+  cerr << "maintained by Oleksandr Motsak and Aurélien Gâteau." << endl;
+  cerr << endl;
+  cerr << "Homepage: " << MSRP_PACKAGE_URL << endl; 
+  cerr << "Please send your feedback to " << MSRP_PACKAGE_BUGREPORT << endl;
   cerr << endl;
   cerr << "msrp is a utility to perform regular expression substitution"<< endl;
   cerr << "It reads one or more files as input and modifies both their "<< endl;
