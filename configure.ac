@@ -1,10 +1,7 @@
-AC_INIT(msrp,0.9.5,cilibrar@cilibrar.com)
+AC_INIT(msrp,0.9.4,cilibrar@cilibrar.com)
 AC_CONFIG_SRCDIR(src/msrp.cc)
 AM_INIT_AUTOMAKE
 AC_CANONICAL_HOST
-case "${host_os}" in
-cygwin) AC_DEFINE(WINDOWS,1) ;;
-esac
 AC_PROG_CXX
 AC_ARG_WITH(pcre,
 [--with-pcre=PATH,Explicit PCRE library path], ,

@@ -75,15 +75,11 @@ string cplusplusbasename(string inpstring)
 {
   char *dup = strdup(inpstring.c_str());
   string result;
-#if defined(WIN32) || defined(WINDOWS) || defined(_WINDOWS) || defined(CYGWIN)
-	int lastIndex = inpstring.find_last_of("/\\");
-	if (lastIndex == std::string::npos)
-		result = inpstring;
-	else
-		result = inpstring.substr(lastIndex + 1);
-#else
-  result = string(basename(dup));
-#endif
+  int lastIndex = inpstring.find_last_of("/\\");
+  if (lastIndex == std::string::npos)
+    result = inpstring;
+  else
+    result = inpstring.substr(lastIndex + 1);
   free(dup);
   return result;
 }
