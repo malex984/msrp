@@ -20,3 +20,19 @@ Ruby on Rails (model names must match model filenames, same with views)
 Java programming (renaming classes via regular expression en masse)
 Debian packaging ( cp -rv ../debian . &&  msrp oldpkgname newpkgname debian/ )
 
+
+
+
+Important Changes in 0.9.5:
+===========================
+
+New Maintainers since 2010: Oleksandr Motsak and Aurélien Gāteau (see AUTHORS)
+
+New Copyright: Simplified BSD License (see COPYING)
+
+New Homepage: http://msrp.github.com
+
+New Mailing Group (msrp-tool) for your feedback: http://groups.google.com/group/msrp-tool
+
+Source repository: http://github.com/malex984/msrp
+
