@@ -19,17 +19,17 @@ Source repository: http://github.com/malex984/msrp
 Improvements in 0.9.5:
 ======================
 
-* msrp relies on PCRE to do regexp-matching and is limited to \\0..\\9 in back-regexp-ing.
+* msrp relies on PCRE to do regexp-matching and is limited to \0..\9 in back-regexp-ing.
 
-Now one can also use the current file name (\\f) in both search and replace strings. 
+Now one can also use the current file name (via '\f') in both search and replace strings.
 
 For example: imagine a file 'file.cc' containing:
-//// \\file $ID$ 
+//// \file $ID$ 
 
-after calling 'msrp -f -d "[$]ID[$]" "\\f" file.cc' it will look as follows:
-//// \\file file.cc 
+after calling 'msrp -f -d "[$]ID[$]" "\f" file.cc' it will look as follows:
+//// \file file.cc 
 
-* one can also use the following escape sequences now: \\n = end-of-line & \\r = carrage-return
+* one can also use the following escape sequences now: \n = end-of-line & \r = carrage-return
 
 * While renaming files which are under some VCS one should better try using the VCS-specific command:
 
