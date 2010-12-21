@@ -107,14 +107,12 @@ void process_file(SPCRE s, string repstr, string fname)
 
 string cplusplusbasename(string inpstring)
 {
-  char *dup = strdup(inpstring.c_str());
   string result;
   int lastIndex = inpstring.find_last_of("/\\");
   if (lastIndex == std::string::npos)
     result = inpstring;
   else
     result = inpstring.substr(lastIndex + 1);
-  free(dup);
   return result;
 }
 
