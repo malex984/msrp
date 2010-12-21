@@ -8,14 +8,14 @@ echo "g" > file.aa.file.git || exit 1
 git add file.aa.file.git || exit 1
 
 echo "testing: mv --git / tracked: "
-../src/msrp --git -c -d "aa" "bb" file.aa.file.git || (git rm -f file.aa.file.git; rm file.aa.file; exit 1)
+$MSRP --git -c -d "aa" "bb" file.aa.file.git || (git rm -f file.aa.file.git; rm file.aa.file; exit 1)
 
 test -e file.bb.file.git || (git rm -f file.aa.file.git; rm file.aa.file; exit 1)
 
 echo "PASSED!"
 
 echo "testing: mv --git / untracked: "
-../src/msrp --git -c -d "aa" "bb" file.aa.file || (git rm -f file.bb.file.git; rm file.aa.file; exit 1)
+$MSRP --git -c -d "aa" "bb" file.aa.file || (git rm -f file.bb.file.git; rm file.aa.file; exit 1)
 
 test -e file.bb.file || (git rm -f file.bb.file.git; rm file.aa.file; exit 1)
 

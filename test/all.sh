@@ -1,16 +1,7 @@
 #! /bin/sh
+set -e
 
-./file.cc.sh || exit 1
-
-echo 
-
-./git.mv.sh  || exit 1
-
-
-echo 
-
-./nl.sh  || exit 1
-
-
-
-
+echo "MSRP=$MSRP"
+./file.cc.sh
+./git.mv.sh
+./nl.sh
