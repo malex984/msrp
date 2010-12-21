@@ -60,7 +60,7 @@ if test "x$PCRE_CONFIG" = "x"; then
   AC_MSG_ERROR([Cannot find PCRE library, please install])
 fi
 
-if $PCRE_CONFIG --version >&/dev/null; then echo -n ; else
+if $PCRE_CONFIG --version > /dev/null; then echo -n ; else
  AC_MSG_ERROR([No pcre-config script at $PCRE_CONFIG])
 fi
 
