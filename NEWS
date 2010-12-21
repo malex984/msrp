@@ -1,2 +1,51 @@
 The Meta Search and Replace (msrp) utility was released at the
 end of 2007 by Rudi Cilibrasi.
+
+
+Important Changes in 0.9.5:
+===========================
+
+New Maintainers since 2010: Oleksandr Motsak and Aurélien Gāteau (see AUTHORS)
+
+New Copyright: Simplified BSD License (see COPYING)
+
+New Homepage: http://msrp.github.com
+
+New Mailing Group (msrp-tool) for your feedback: http://groups.google.com/group/msrp-tool
+
+Source repository: http://github.com/malex984/msrp
+
+
+Improvements in 0.9.5:
+======================
+
+* msrp relies on PCRE to do regexp-matching and is limited to \\0..\\9 in back-regexp-ing.
+
+Now one can also use the current file name (\\f) in both search and replace strings. 
+
+For example: imagine a file 'file.cc' containing:
+//// \\file $ID$ 
+
+after calling 'msrp -f -d "[$]ID[$]" "\\f" file.cc' it will look as follows:
+//// \\file file.cc 
+
+* one can also use the following escape sequences now: \\n = end-of-line & \\r = carrage-return
+
+* While renaming files which are under some VCS one should better try using the VCS-specific command:
+
+  * If the command fails msrp will fall-back to the usual plain rename command.
+  * Additionally to --svn and --hg we support --git and --bzr now!
+
+* msrp should be compilable under Linux, Mac OS X, AIX, cygwin etc.
+Please try to build it and let us know about your experience!
+
+* Additionally to autotools we have got cmake build system. 
+Please check it out and let us know about your experience!
+
+
+Any feedback is welcome! Pleas don't hesitate to post to our mailing list!
+
+Yours, 
+     msrp'team
+
+ps: we are currently looking for packagers!
