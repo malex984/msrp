@@ -5,6 +5,7 @@
 #define MSRP_PACKAGE_NAME "@PACKAGE_NAME@"
 #define MSRP_PACKAGE_BUGREPORT "@PACKAGE_BUGREPORT@"
 #define MSRP_PACKAGE_STRING "@PACKAGE_STRING@"
+// TODO: @ PACKAGE_URL @ may not work with early autoconf ... ?
 #define MSRP_PACKAGE_URL "@PACKAGE_URL@"
 
 #endif
