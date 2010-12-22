@@ -1,7 +1,11 @@
 project(msrp)
 cmake_minimum_required(VERSION 2.8)
 
-set(PACKAGE_VERSION 0.9.5)
+set(PACKAGE_NAME "msrp")
+set(PACKAGE_VERSION "0.9.5")
+set(PACKAGE_URL "http://msrp.github.com")
+set(PACKAGE_BUGREPORT "msrp-tool@googlegroups.com")
+
 
 # dist target
 set(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${PACKAGE_VERSION})
