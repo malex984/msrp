@@ -1,23 +1,5 @@
-1. Using autotools: 
-
-in order to generate "configure" script please you the following:
-
-aclocal && automake --add-missing && autoconf
-
-Afterwards proceed as usual:
-
-./configure && make
-
-
-
-
-2. Using cmake:
-
-
 create your build directory (in source building is discouraged!)
-
-cmake $(PATH_TO_MSRP_ROOT_SOURCE)
-
+cmake $(PATH_TO_UNPACKED_MSRP_ROOT_SOURCE_DIR)
 make
 
 

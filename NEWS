@@ -39,7 +39,7 @@ after calling 'msrp -f -d "[$]ID[$]" "\f" file.cc' it will look as follows:
 * msrp should be compilable under Linux, Mac OS X, AIX, cygwin etc.
 Please try to build it and let us know about your experience!
 
-* Additionally to autotools we have got cmake build system. 
+* Switched from autotools to cmake (see COMPILE) 
 Please check it out and let us know about your experience!
 
 
