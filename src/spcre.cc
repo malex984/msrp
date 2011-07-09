@@ -13,13 +13,13 @@ string SPCREResult::backsub(string origstr)
   const char *cs = origstr.c_str();
   while (curoffset < len) {
     int slashind = origstr.find('\\', curoffset);
-    if (slashind != string::npos) {
+    if (slashind != int(string::npos)) {
       res.append(cs + curoffset, slashind - curoffset);
       if (slashind + 1 < len) {
         char c = cs[slashind+1];
         if (c >= '0' && c <= '9') {
           int whichnum = c - '0';
-          if (whichnum <= cap.size())
+          if (whichnum <= int(cap.size()))
             res.append(cap[whichnum]);
         }
       }
@@ -72,7 +72,7 @@ SPCREResult SPCRE::match(string inpstr, int offset)
     int i;
     res.start_offset = ovector[0];
     res.pastend_offset = ovector[1];
-    if (res.pastend_offset >= inpstr.size())
+    if (res.pastend_offset >= int(inpstr.size()))
       res.didfinish = true;
     for (i = 0; i < rc; i += 1) {
       int olen = ovector[2*i+1] - ovector[2*i];

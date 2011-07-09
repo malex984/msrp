@@ -6,6 +6,8 @@ set(PACKAGE_VERSION "0.9.5")
 set(PACKAGE_URL "http://msrp.github.com")
 set(PACKAGE_BUGREPORT "msrp-tool@googlegroups.com")
 
+# Compilation flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall")
 
 # dist target
 set(ARCHIVE_NAME ${CMAKE_PROJECT_NAME}-${PACKAGE_VERSION})
