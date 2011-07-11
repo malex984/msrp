@@ -45,7 +45,7 @@ string pre_backsub(string origstr, string filename)
   const char *cs = origstr.c_str();
   while (curoffset < len) {
     int slashind = origstr.find('\\', curoffset);
-    if (slashind != string::npos) {
+    if (slashind != int(string::npos)) {
       res.append(cs + curoffset, slashind - curoffset);
       if (slashind + 1 < len) {
         char c = cs[slashind+1];
@@ -109,7 +109,7 @@ string cplusplusbasename(string inpstring)
 {
   string result;
   int lastIndex = inpstring.find_last_of("/\\");
-  if (lastIndex == std::string::npos)
+  if (lastIndex == int(std::string::npos))
     result = inpstring;
   else
     result = inpstring.substr(lastIndex + 1);

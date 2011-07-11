@@ -72,7 +72,7 @@ deque<string> expand_dir(CliOpt options, const char *path)
   }
   string spath = string(path) + string("/");
   struct dirent *cur;
-  while (cur = readdir(d)) {
+  while ((cur = readdir(d)) != 0) {
     if (is_path_filtered(options, cur->d_name))
       continue;
     string cpath = spath + string(cur->d_name);

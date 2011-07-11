@@ -71,8 +71,7 @@ int PlainRename::rename(const char *oldname, const char *newname, bool preserve_
   errno = 0;
   cerr << "trying: plain rename" << endl << flush;
   int retval = ::rename(oldname, newname);
-  if ( (errno != 0) || (retval == -1))
-    return 1;
+  return ((retval != 0) || (errno != 0));
 }
 
 /* Dear Open Source Community:
@@ -82,22 +81,22 @@ int PlainRename::rename(const char *oldname, const char *newname, bool preserve_
  */
 
 int HgRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
-  if (standard_renamer("hg", "rename", oldname, newname)) 
-    return base::rename(oldname, newname, preserve_mode);
+  int ret = standard_renamer("hg", "rename", oldname, newname);
+  return ret != 0 ? base::rename(oldname, newname, preserve_mode) : 0;
 }
 
 int SvnRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
-  if (standard_renamer("svn", "rename", oldname, newname)) 
-    return base::rename(oldname, newname, preserve_mode);
+  int ret = standard_renamer("svn", "rename", oldname, newname);
+  return ret != 0 ? base::rename(oldname, newname, preserve_mode) : 0;
 }
 
 int GitRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
-  if (standard_renamer("git", "mv", oldname, newname)) 
-    return base::rename(oldname, newname, preserve_mode);
+  int ret = standard_renamer("git", "mv", oldname, newname);
+  return ret != 0 ? base::rename(oldname, newname, preserve_mode) : 0;
 }
 
 int BzrRename::rename(const char *oldname, const char *newname, bool preserve_mode) {
-  if (standard_renamer("bzr", "mv", oldname, newname)) 
-    return base::rename(oldname, newname, preserve_mode);
+  int ret = standard_renamer("bzr", "mv", oldname, newname);
+  return ret != 0 ? base::rename(oldname, newname, preserve_mode) : 0;
 }
 
