@@ -1,7 +1,9 @@
 #! /bin/sh
 set -e
 
-echo "MSRP=$MSRP"
-./file.cc.sh
-./git.mv.sh
-./nl.sh
+echo "MSRP=$MSRP, DIR: $DIR"
+
+"$DIR/nl.sh"
+"$DIR/file.cc.sh"
+"$DIR/git.mv.sh"
+"$DIR/git.tracked.sh"

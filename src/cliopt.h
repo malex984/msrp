@@ -1,7 +1,7 @@
 #ifndef __CLIOPT_H
 #define __CLIOPT_H
 
-#include "RenameCommand.h"
+class VCSCommand;
 
 class CliOpt {
   public:
@@ -19,16 +19,19 @@ class CliOpt {
     do_preserve = false;
 
     subdir_recursion = true;
+    
+    process_tracked_only = false;
 
-    renamer = new PlainRename();
+    renamer = 0; 
   }
 
-  RenameCommand *renamer;
+  VCSCommand *renamer;
 
   bool case_insensitive, word_boundary;
   bool do_filenames, do_directorynames, do_contents;
   bool is_quiet, do_dot_paths;
   bool do_preserve;
+  bool process_tracked_only;
 
   bool subdir_recursion;
   /* returns true iff it was an option */

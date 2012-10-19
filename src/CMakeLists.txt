@@ -4,7 +4,7 @@ set(msrp_SRCS
   cliopt.cc
   msrp.cc
   spcre.cc
-  RenameCommand.cc
+  VCSCommand.cc
   )
 
 # Build
