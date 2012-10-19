@@ -1,5 +1,6 @@
 #! /bin/sh
 
+#expected to be run using a git clone of msrp repo!?
 echo "TESTING --git option on untracked files: "
 
 echo "a" > file.aa.file || exit 1

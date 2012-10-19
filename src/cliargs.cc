@@ -2,10 +2,12 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <cstdlib>
-#include "cliargs.h"
-#include "autover.h"
 #include <cstring>
 #include <algorithm>
+
+#include "autover.h"
+#include "cliargs.h"
+#include "VCSCommand.h"
 
 using namespace std;
 
@@ -20,6 +22,16 @@ CliArgs::CliArgs(const char **argv) {
     printHelp();
     exit(1);
   }
+  if( options.renamer == NULL )
+  {
+    if( options.process_tracked_only ) 
+    {
+      cerr << "Warning: --tracked-only only makes sence if VCS is specified as well!"; 
+      options.process_tracked_only = false;
+    }
+    options.renamer = new PlainCommand(); 
+  }
+    
   searchpat = args.front(); args.pop_front();
   repstr = args.front(); args.pop_front();
 }
@@ -157,14 +169,15 @@ void CliArgs::printHelp(void) const
   cerr << "  -w   enable word boundary constraint" << endl;
   cerr << "  --dot-paths   enable hidden (.) directory recursion" << endl;
   cerr << endl;
-  cerr << "  Integrated renaming options:" << endl;
-
+  cerr << "  Integrated *optional* renaming options:" << endl;
   cerr << "  --svn  or --subversion : Subversion RCS rename support" << endl;
   cerr << "  --preserve             : same as -p (preserve .orig files)"<< endl;
-  cerr << "  --hg  or --mercurial : Mercurial    RCS rename support" << endl;
-  cerr << "  --git                : Git          RCS rename support" << endl;
-  cerr << "  --bzr or --bazaar    : Bazaar       RCS rename support" << endl;
-  cerr << "  --mv  or --plain     : (default) plain Unix rename" << endl;
+  cerr << "  --hg  or --mercurial   : Mercurial    RCS rename support" << endl;
+  cerr << "  --git                  : Git          RCS rename support" << endl;
+  cerr << "  --bzr or --bazaar      : Bazaar       RCS rename support" << endl;
+  cerr << "  --mv  or --plain       : (default) plain Unix rename" << endl << endl;
+  cerr << "  --tracked-only         : process only tracked files" << endl;
+  
   cerr << endl;
 }
 

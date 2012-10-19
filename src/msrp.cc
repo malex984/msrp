@@ -1,6 +1,7 @@
 #include "cliopt.h"
 #include "cliargs.h"
 #include "spcre.h"
+#include "VCSCommand.h"
 
 #include <set>
 #include <iostream>
@@ -159,6 +160,8 @@ int main(int argc, const char **argv)
   if (ca.options.do_contents) {
     for (i = tl.files.begin(); i != tl.files.end(); i++) {
       string cur = (*i);
+      if( ca.options.process_tracked_only && !ca.options.renamer->is_tracked(cur.c_str()) )
+        continue;
       SPCRE s(pre_backsub(ca.searchpat, cur), ca.options);
       process_file(s, pre_backsub(ca.repstr, cur), cur);
     }
@@ -169,13 +172,17 @@ int main(int argc, const char **argv)
   if (ca.options.do_filenames) {
     for (i = tl.files.begin(); i != tl.files.end(); i++) {
       string cur = (*i);
-      rename_file_maybe(s, ca.repstr, cur);
+      if( ca.options.process_tracked_only && !ca.options.renamer->is_tracked(cur.c_str()) )
+        continue;
+      rename_file_maybe(s, ca.repstr, cur); // TODO: maybe do the content processing with the newly renamed file if it was not done before?
     }
   }
 
   if (ca.options.do_directorynames) {
     for (i = tl.dirs.begin(); i != tl.dirs.end(); i++) {
       string cur = (*i);
+      if( ca.options.process_tracked_only && !ca.options.renamer->is_tracked(cur.c_str()) )
+        continue;
       rename_dir_maybe(s, ca.repstr, cur);
     }
   }
