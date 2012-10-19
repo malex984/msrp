@@ -1,7 +1,8 @@
+#include "spcre.h"
+
 #include <iostream>
 #include <string>
 #include <pcre.h>
-#include "spcre.h"
 
 using namespace std;
 
