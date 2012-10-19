@@ -1,8 +1,10 @@
 #ifndef __CLIARGS_H
 #define __CLIARGS_H
 
-#include <deque>
 #include "cliopt.h"
+
+#include <deque>
+#include <string>
 
 int get_path_mode(const char *path);
 bool is_path_file(const char *path);

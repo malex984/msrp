@@ -1,43 +1,7 @@
 #ifndef __CLIOPT_H
 #define __CLIOPT_H
 
-class RenameCommand {
-  public:
-  /// returns non-zero value in case of an error
-  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode) {
-    return 1; // cannot rename!
-  };
-};
-
-class PlainRename : public RenameCommand {
-  typedef RenameCommand base;
-public:
-  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
-};
-
-class HgRename : public PlainRename {
-  typedef PlainRename base;
-public:
-  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
-};
-
-class SvnRename : public PlainRename {
-  typedef PlainRename base;
-public:
-  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
-};
-
-class GitRename : public PlainRename {
-  typedef PlainRename base;
-public:
-  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
-};
-
-class BzrRename : public PlainRename {
-  typedef PlainRename base;
-public:
-  virtual int rename(const char *oldpath, const char *newpath, bool preserve_mode);
-};
+#include "RenameCommand.h"
 
 class CliOpt {
   public:

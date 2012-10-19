@@ -1,3 +1,7 @@
+#include "cliopt.h"
+#include "cliargs.h"
+#include "spcre.h"
+
 #include <set>
 #include <iostream>
 #include <fstream>
@@ -5,11 +9,6 @@
 #include <sys/stat.h>
 #include <cstdlib>
 #include <string.h>
-
-#include <cliopt.h>
-#include <cliargs.h>
-#include <spcre.h>
-
 #include <string>
 
 using namespace std;
