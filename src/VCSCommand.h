@@ -1,5 +1,5 @@
-#ifndef __RENAMECOMMAND_H
-#define __RENAMECOMMAND_H
+#ifndef __VCSCOMMAND_H
+#define __VCSCOMMAND_H
 
 /// Pure interface
 class VCSCommand 
@@ -70,4 +70,4 @@ public:
   bool is_tracked(const char *path);
 };
 
-#endif // __RENAMECOMMAND_H
+#endif // __VCSCOMMAND_H
