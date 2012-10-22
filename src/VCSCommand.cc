@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <cstdlib>
 #include <errno.h>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -16,7 +17,8 @@ namespace
 
 static int standard_exec(const char* const szArgs[])
 {
-  pid_t pid;
+  pid_t pid; 
+   
   errno = 0;  
   
   if( (pid = fork()) == -1 )
@@ -24,22 +26,33 @@ static int standard_exec(const char* const szArgs[])
     cerr << "Error: sorry could not fork!" << endl << flush;
     return 1;    
   }
+   
+
+//  int fds[2]; if( pipe(fds) < 0 ) cerr << "Error: sorry could not pipe!" << endl << flush;
+  
   
   if (pid == 0)  // child!?
-  {   
-    cerr << "Trying Command Execution:[";
+  { 
     int i = 0;
+//    close(fds[0]); close(fds[1]);
+/*    
+    cerr << "Trying Command Execution:["; // what about quiet mode?
     while( szArgs[i] != NULL )
     {
       cerr << " " << szArgs[i];
       i++;
     }
-    cerr << " ]..." << endl << flush;
-    
+    cerr << " ]..."  << flush;
+*/
+     
+    // redirect cout and cerr to /dev/null for executed command...
+//    dup2(open("/dev/null", 0), STDOUT_FILENO);  // should not do redirect STDOUT :(((
+    dup2(open("/dev/null", 0), STDERR_FILENO);
+       
     // no return on success!!!    
     i = execvp(szArgs[0], const_cast<char* const*>(szArgs));
-    
-    cerr << "Warning: command execution failed." << endl << flush;
+     
+    cerr << endl << "Error: command execution(execvp) failed." << endl << flush;
     
     if ( (errno != 0) || (i == -1))
       _exit(-1);
@@ -47,22 +60,34 @@ static int standard_exec(const char* const szArgs[])
   }
   else // fork > 0 => parent
   {
+//    close(fds[1]);    close(fds[0]);
     int i;
     if( wait(&i) ==-1 ) 
     {
       cerr << "Error: sorry could not wait!" << endl << flush;
       return 1;    
     }
+     
+//    cerr << "Execution Status: " << i << flush; 
+//    if( errno != 0 ) cerr << "Error:" << flush; 
+       
     // did the child terminate normally?
     if(WIFEXITED(i))
-//      return ((i != 0) || (errno != 0));
+    {   
+//      cerr << ", Exitcode: " << WEXITSTATUS(i) << endl << flush; 
       return ((WEXITSTATUS(i) != 0) || (errno != 0));
+    }
+     
       
     // was the child terminated by a signal?
     if (WIFSIGNALED(i))
+    {   
+//      cerr << ", Signal: " << WTERMSIG(i) << endl << flush;	  
       return WTERMSIG(i);
+    }
+     
     
-//  cerr << "status: " << i << ", errno: " << errno << endl;
+//    cerr << "Exit Status: " << i << ", errno: " << errno << endl;
     return ((i != 0) || (errno != 0));
   }
 }
@@ -86,7 +111,7 @@ static int standard_renamer(const char *reposcommand, const char *repossubcomman
 
 int PlainCommand::rename(const char *oldname, const char *newname, bool preserve_mode) {
   errno = 0;
-  cerr << "trying: plain rename" << endl << flush;
+//  cout << "trying: plain rename" << endl << flush;
   int retval = ::rename(oldname, newname);
   return ((retval != 0) || (errno != 0));
 }
@@ -116,10 +141,13 @@ int HgCommand::rename(const char *oldname, const char *newname, bool preserve_mo
 
 
 int GitCommand::rename(const char *oldname, const char *newname, bool preserve_mode) {
-  if( is_tracked(oldname) )
-    return standard_renamer("git", "mv", oldname, newname);
-  else
-    return base::rename(oldname, newname, preserve_mode);    
+//  if( is_tracked(oldname) )
+//  {
+//  } 
+  const char* const a[] = {"git", "mv", "-k", oldname, newname, NULL};
+  if( standard_exec(a) != 0) 
+    return base::rename(oldname, newname, preserve_mode); // fallback to plain rename
+  return 0;
 }
 
 int BzrCommand::rename(const char *oldname, const char *newname, bool preserve_mode) {
@@ -134,13 +162,13 @@ int BzrCommand::rename(const char *oldname, const char *newname, bool preserve_m
 
 
 bool SvnCommand::is_tracked(const char *path) {
-  return standard_command("svn", "status", path) == 0;
+  return standard_command("svn", "status", path) == 0; // TODO: command?
 }
 bool HgCommand::is_tracked(const char *path) {
-  return standard_command("hg", "status", path) == 0;
+  return standard_command("hg", "status", path) == 0; // TODO: command?
 }
 bool BzrCommand::is_tracked(const char *path) {
-  return standard_command("bzr", "status", path) == 0;
+  return standard_command("bzr", "status", path) == 0; // TODO: command?
 }
 bool GitCommand::is_tracked(const char *path) {
   const char* const a[] = {"git", "ls-files", "--error-unmatch", "--", path, NULL};
