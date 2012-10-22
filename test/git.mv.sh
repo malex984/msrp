@@ -20,11 +20,11 @@ $MSRP --git -c -d "aa" "bb" file.aa.file || (git rm -f file.bb.file.git; rm file
 
 test -e file.bb.file || (git rm -f file.bb.file.git; rm file.aa.file; exit 1)
 
-echo "PASSED!"
 
-rm file.bb.file || exit 1
 git rm -f file.bb.file.git || exit 1
+rm -f file.bb.file || exit 1
 
+echo "PASSED!"
 
 
 

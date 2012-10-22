@@ -1,5 +1,5 @@
 #! /bin/sh
-set -e
+# set -e
 
 echo "MSRP=$MSRP, DIR: $DIR"
 
