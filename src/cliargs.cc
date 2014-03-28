@@ -167,6 +167,7 @@ void CliArgs::printHelp(void) const
   cerr << "  -q   quiet mode" << endl;
   cerr << "  -s   disable subdirectory recursion" << endl;
   cerr << "  -w   enable word boundary constraint" << endl;
+  cerr << "  --first       change the first match only" << endl;
   cerr << "  --dot-paths   enable hidden (.) directory recursion" << endl;
   cerr << endl;
   cerr << "  Integrated *optional* renaming options:" << endl;

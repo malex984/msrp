@@ -36,6 +36,7 @@ string SPCREResult::backsub(string origstr)
 
 string SPCRE::gsub(string origstr, string repstr)
 {
+  const bool first_match_only = options.first_match_only;
   int curoffset = 0;
   int len = origstr.size();
   string res;
@@ -46,6 +47,10 @@ string SPCRE::gsub(string origstr, string repstr)
       res.append(cs + curoffset, r.start_offset - curoffset);
       res.append(r.backsub(repstr));
       curoffset = r.pastend_offset;
+      if (first_match_only) {
+        res.append(cs+curoffset, len - curoffset); 
+        break; 
+      }
     }
     else {
       res.append(cs+curoffset, len - curoffset);
