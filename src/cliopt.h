@@ -21,6 +21,8 @@ class CliOpt {
     subdir_recursion = true;
     
     process_tracked_only = false;
+    
+    first_match_only = false;
 
     renamer = 0; 
   }
@@ -32,6 +34,7 @@ class CliOpt {
   bool is_quiet, do_dot_paths;
   bool do_preserve;
   bool process_tracked_only;
+  bool first_match_only;
 
   bool subdir_recursion;
   /* returns true iff it was an option */

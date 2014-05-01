@@ -5,5 +5,7 @@ echo "MSRP=$MSRP, DIR: $DIR"
 
 "$DIR/nl.sh"
 "$DIR/file.cc.sh"
+"$DIR/first.sh"
 "$DIR/git.mv.sh"
 "$DIR/git.tracked.sh"
+
