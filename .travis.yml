@@ -1,0 +1,29 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+before_install:
+  - echo $LANG
+  - echo $LC_ALL
+  - echo $TRAVIS_OS_NAME
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get install -y libpcre3 libpcre3-dev; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install pcre && brew link --force pcre; fi
+script: 
+  - cmake . 
+  - make 
+  - make check 
+  - make dist 
+  - make clean 
+notifications:
+  email:
+    recipients:
+      - malex984@googlemail.com
+    on_success: change
+    on_failure: always
+env:
+  - LANG="en_US.UTF-8"
+os:
+  - linux
+  - osx
+osx_image: xcode61
+
